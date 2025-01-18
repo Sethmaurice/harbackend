@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 
 export const configValidationSchema = Joi.object({
   JWT_SECRET: Joi.string().required(), // Validate that JWT_SECRET is set
