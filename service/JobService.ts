@@ -32,6 +32,10 @@ export class JobService {
   async getAllJobs(filters?: any): Promise<Job[]> {
     const queryBuilder = this.jobRepository.createQueryBuilder('job');
 
+    if (filters?.id) {
+      queryBuilder.andWhere('job.id = :id', { id: filters.id });
+    }
+
     if (filters?.title) {
       queryBuilder.andWhere('job.title LIKE :title', { title: `%${filters.title}%` });
     }
@@ -44,6 +48,11 @@ export class JobService {
 
     return await queryBuilder.getMany();
   }
+
+  async getJobById(id: number): Promise<Job | null> {
+    return this.jobRepository.findOne({ where: { id } });
+  }
+  
 
   async addJob(title: string, category: string, location: string, description: string): Promise<Job> {
     const newJob = this.jobRepository.create({
