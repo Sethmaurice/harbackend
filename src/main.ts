@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors({
     // origin: 'http://localhost:3000', // Frontend URL
     origin: 'https://harambeerw.vercel.app/',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization', // Allow specific headers
     credentials: true, // If you're using cookies or JWT
   });
