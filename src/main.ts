@@ -14,8 +14,8 @@ async function bootstrap() {
     credentials: true, // If you're using cookies or JWT
   });
 
-  await app.listen(process.env.PORT ?? 4000); // Default to port 4000 for localy
-  // await app.listen(process.env.PORT ?? 3000); // Default to port 4000 for render deployment
+  // await app.listen(process.env.PORT ?? 4000); // Default to port 4000 for localy
+  await app.listen(process.env.PORT ?? 3000); // Default to port 4000 for render deployment
 
 }
 
