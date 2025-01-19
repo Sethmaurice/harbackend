@@ -12,6 +12,7 @@ import { JobController } from 'controller/JobController';
 import { JobService } from 'service/JobService';
 import { ApplicationController } from 'controller/ApplicationController';
 import { ApplicationService } from 'service/ApplicationService';
+import { EmailService } from 'service/EmailService';
 
 @Module({
   imports: [
@@ -34,6 +35,6 @@ import { ApplicationService } from 'service/ApplicationService';
     AuthModule, // Add AuthModule here
   ],
   controllers: [AppController, JobController, ApplicationController], // Register JobController
-  providers: [AppService, JobService, ApplicationService], // Register JobService
+  providers: [AppService, JobService, ApplicationService, EmailService], // Register JobService
 })
 export class AppModule {}

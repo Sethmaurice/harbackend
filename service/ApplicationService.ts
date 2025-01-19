@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Application } from 'Entities/Application/Application';
 import { Job } from 'Entities/Job/Job';
 import { User } from 'Entities/User/User';
+import { EmailService } from './EmailService';
 
 @Injectable()
 export class ApplicationService {
@@ -20,6 +21,7 @@ export class ApplicationService {
     private jobRepository: Repository<Job>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private emailService: EmailService,
   ) {}
 
   async applyForJob(userId: number, jobId: number): Promise<Application> {
@@ -46,7 +48,18 @@ export class ApplicationService {
       status: 'Pending',
     });
   
-    return await this.applicationRepository.save(application);
+    // return await this.applicationRepository.save(application);
+
+    // Save application
+    const savedApplication = await this.applicationRepository.save(application);
+
+    // Send email notification
+    const subject = `Application Status Update`;
+    const message = `Hello ${user.email}, your application status has been updated to: ${savedApplication.status}.`;
+
+    await this.emailService.sendEmail(user.email, subject, message);
+
+    return savedApplication;
   }
 
   async getApplicationsByUser(userId: number): Promise<Application[]> {
