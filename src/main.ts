@@ -9,8 +9,10 @@ async function bootstrap() {
 
   // Enable CORS for frontend (React app running on localhost:3000)
   app.enableCors({
-    // origin: 'http://localhost:3000', // Frontend URL
-    origin: 'https://harambeerw.vercel.app',
+    origin: [
+      'http://localhost:3000',  // Local frontend
+      'https://harambeerw.vercel.app'  // Deployed frontend
+    ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Content-Type, Authorization', // Allow specific headers
     credentials: true, // If you're using cookies or JWT
